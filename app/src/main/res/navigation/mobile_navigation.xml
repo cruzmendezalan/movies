@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.android.umba.presentation.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.android.umba.presentation.moviedetails.MovieDetailsFragment"
+        android:label="@string/title_latest_movie"
+        tools:layout="@layout/fragment_movie_details" />
 </navigation>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.moviedetails.MovieDetailsFragment">
+
+    <ImageView
+        android:id="@+id/movieImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="300dp"
+        android:minHeight="150dp"
+        app:layout_constraintBottom_toTopOf="@+id/movieName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:background="@android:color/holo_blue_bright" />
+
+    <TextView
+        android:id="@+id/movieName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/movieOverview"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieImage"
+        tools:text="Fight Club" />
+
+    <TextView
+        android:id="@+id/movieOverview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:lines="4"
+        app:layout_constraintBottom_toTopOf="@+id/productionCountriesLabel"
+        app:layout_constraintLeft_toLeftOf="@+id/movieName"
+        app:layout_constraintRight_toRightOf="@+id/movieName"
+        app:layout_constraintTop_toBottomOf="@+id/movieName"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/productionCountriesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/production_countries_label"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/seeReviews"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintLeft_toLeftOf="@+id/movieName"
+        app:layout_constraintRight_toRightOf="@+id/movieName"
+        app:layout_constraintTop_toBottomOf="@+id/movieOverview" />
+
+    <TextView
+        android:id="@+id/productionCountriesValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/seeReviews"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintLeft_toRightOf="@+id/productionCountriesLabel"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/productionCountriesLabel"
+        app:layout_constraintVertical_bias="0"
+        tools:text="EUA, Mexico" />
+
+    <Button
+        android:id="@+id/seeReviews"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/see_reviews_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/movieName"
+        app:layout_constraintRight_toRightOf="@+id/movieName"
+        app:layout_constraintTop_toBottomOf="@+id/productionCountriesLabel" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

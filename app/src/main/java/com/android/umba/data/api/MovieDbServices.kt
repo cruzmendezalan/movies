@@ -1,7 +1,9 @@
 package com.android.umba.data.api
 
 import com.android.umba.data.configuration.UmbaConfiguration
+import com.android.umba.domain.MovieDetails
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -23,6 +25,18 @@ interface MovieDbServices {
     suspend fun getApiConfiguration(
         @Query("api_key") apiKey: String = UmbaConfiguration.getApiKey()
     ): ApiConfiguration
+
+    @GET("movie/{movie_id}")
+    suspend fun getMovieDetails(
+        @Path("movie_id") movieId: String,
+        @Query("api_key") apiKey: String = UmbaConfiguration.getApiKey()
+    ): MovieDetails
+
+
+    @GET("movie/latest")
+    suspend fun getLatestMovie(
+        @Query("api_key") apiKey: String = UmbaConfiguration.getApiKey()
+    ): MovieDetails
 }
 
 data class ApiConfiguration(
@@ -39,7 +53,6 @@ data class Images(
     val secure_base_url: String,
     val still_sizes: List<String>
 )
-
 
 
 data class MoviesListResponse(

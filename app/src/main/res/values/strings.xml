@@ -1,10 +1,13 @@
 <resources>
-  <string name="app_name">Movies</string>
-  <string name="title_popular_movies">Popular Movies</string>
-  <string name="title_upcoming_movies">Upcoming Movies</string>
-  <string name="title_notifications">Notifications</string>
+    <string name="app_name">Movies</string>
+    <string name="title_popular_movies">Popular Movies</string>
+    <string name="title_upcoming_movies">Upcoming Movies</string>
+    <string name="title_latest_movie">Latest Movie</string>
     <string name="popularity_label">Popularity</string>
-  <string name="see_details_button_label">Details</string>
-  <string name="imageMovieCoverBackground">Movie cover background</string>
-  <string name="moviesListArgumentKey">type</string>
+    <string name="see_details_button_label">Details</string>
+    <string name="imageMovieCoverBackground">Movie cover background</string>
+    <string name="moviesListArgumentKey">type</string>
+    <string name="production_countries_label">Production Countries</string>
+    <string name="see_reviews_label">See reviews</string>
+    <string name="movieIdKey">movie_id</string>
 </resources>
