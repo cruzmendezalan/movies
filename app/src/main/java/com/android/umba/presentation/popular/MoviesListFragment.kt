@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.android.umba.databinding.FragmentMoviesBinding
+import com.android.umba.R
+import com.android.umba.databinding.FragmentMoviesListBinding
 import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -17,16 +18,19 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class PopularMoviesFragment : Fragment() {
+class MoviesListFragment : Fragment() {
 
-    private val viewModel: PopularMoviesViewModel by viewModels()
-    private lateinit var binding: FragmentMoviesBinding
+    private val viewModel: MoviesListViewModel by viewModels()
+    private lateinit var binding: FragmentMoviesListBinding
+
+    /**
+     * Determines what kind of list we will showing in the UI
+     */
+    private lateinit var moviesListType: String
     private var moviesJob: Job? = null
 
     @Inject
     lateinit var factory: Lazy<MovieHolderFactory>
-
-
     private val adapter: MoviesListAdapter by lazy {
         MoviesListAdapter(factory = getMovieHolderFactory())
     }
@@ -39,8 +43,9 @@ class PopularMoviesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = with(FragmentMoviesBinding.inflate(inflater, container, false)) {
+    ): View = with(FragmentMoviesListBinding.inflate(inflater, container, false)) {
         binding = this
+        moviesListType = arguments?.getString(getString(R.string.moviesListArgumentKey)).orEmpty()
         this.root
     }
 
@@ -55,7 +60,7 @@ class PopularMoviesFragment : Fragment() {
         moviesJob?.cancel()
         moviesJob = lifecycleScope.launch {
             viewModel
-                .fetchPopularMovies()
+                .fetchMoviesList(moviesListType)
                 .collectLatest {
                     binding.container.visibility = View.VISIBLE
                     adapter.submitData(it)

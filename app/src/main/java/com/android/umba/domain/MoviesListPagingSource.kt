@@ -1,20 +1,19 @@
 package com.android.umba.domain
 
-import androidx.paging.*
-import com.android.umba.data.api.MovieDbServices
-import com.android.umba.data.api.PopularMovies
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
+import com.android.umba.data.api.MoviesListResponse
 import javax.inject.Inject
 
 
 private const val POPULAR_MOVIES_STARTING_PAGE_INDEX = 1
-const val POPULAR_MOVIES_LIST = "popular_movies"
 
-class PopularMoviesPagingSource @Inject constructor(
-    private val services: MovieDbServices,
-    private val configuration: ApiConfigurationProvider
+class MoviesListPagingSource @Inject constructor(
+    private val configuration: ApiConfigurationProvider,
+    private val moviesStream: MoviesStream
 ) : PagingSource<Int, MovieEntity>() {
 
-    private lateinit var results: PopularMovies
+    private lateinit var results: MoviesListResponse
 
     override fun getRefreshKey(state: PagingState<Int, MovieEntity>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -26,9 +25,9 @@ class PopularMoviesPagingSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieEntity> {
         val page = params.key ?: POPULAR_MOVIES_STARTING_PAGE_INDEX
         return try {
-            results = services.getPopularMovies(page = page)
+            results = moviesStream.getMovies(page)
             val movies = results.results.map {
-                val result = it.toMovieEntity(configuration.getConfiguration())
+                val result = it.toMovieEntity(configuration.getConfiguration(), moviesStream.getListType())
                 result
             }
 

@@ -5,21 +5,31 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
-  <fragment
-      android:id="@+id/navigation_home"
-      android:name="com.android.umba.presentation.popular.PopularMoviesFragment"
-      android:label="@string/title_home"
-      tools:layout="@layout/fragment_movies" />
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.android.umba.presentation.popular.MoviesListFragment"
+        android:label="@string/title_popular_movies"
+        tools:layout="@layout/fragment_movies_list">
+        <argument
+            android:name="@string/moviesListArgumentKey"
+            android:defaultValue="Popular Movies"
+            app:argType="string" />
+    </fragment>
 
-  <fragment
-      android:id="@+id/navigation_dashboard"
-      android:name="com.android.umba.presentation.dashboard.DashboardFragment"
-      android:label="@string/title_dashboard"
-      tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.android.umba.presentation.popular.MoviesListFragment"
+        android:label="@string/title_upcoming_movies"
+        tools:layout="@layout/fragment_movies_list">
+        <argument
+            android:name="type"
+            android:defaultValue="Upcoming Movies"
+            app:argType="string" />
+    </fragment>
 
-  <fragment
-      android:id="@+id/navigation_notifications"
-      android:name="com.android.umba.presentation.notifications.NotificationsFragment"
-      android:label="@string/title_notifications"
-      tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.android.umba.presentation.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>

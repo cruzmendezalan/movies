@@ -10,7 +10,14 @@ interface MovieDbServices {
     suspend fun getPopularMovies(
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = UmbaConfiguration.getApiKey()
-    ): PopularMovies
+    ): MoviesListResponse
+
+
+    @GET("movie/upcoming")
+    suspend fun getUpcomingMovies(
+        @Query("page") page: Int = 1,
+        @Query("api_key") apiKey: String = UmbaConfiguration.getApiKey()
+    ): MoviesListResponse
 
     @GET("configuration")
     suspend fun getApiConfiguration(
@@ -35,7 +42,7 @@ data class Images(
 
 
 
-data class PopularMovies(
+data class MoviesListResponse(
     val page: Int,
     val results: List<Movie>,
     val totalPages: Int

@@ -3,8 +3,8 @@ package com.android.umba.domain
 import com.android.umba.data.api.ApiConfiguration
 import com.android.umba.data.api.Movie
 
-internal fun Movie.toMovieEntity(configuration: ApiConfiguration) = MovieEntity(
-    listName = POPULAR_MOVIES_LIST,
+internal fun Movie.toMovieEntity(configuration: ApiConfiguration, list: String) = MovieEntity(
+    listName = list,
     title = this.title.orEmpty(),
     overview = this.overview.orEmpty(),
     poster_path = "${configuration.images.secure_base_url}${configuration.images.still_sizes.last()}${this.poster_path}",
