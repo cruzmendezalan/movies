@@ -1,4 +1,4 @@
-package com.android.umba.ui.notifications
+package com.android.umba.presentation.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
