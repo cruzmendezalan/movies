@@ -9,6 +9,9 @@ import com.android.umba.domain.MovieEntity
 
 class GridMovieHolder(binding: MovieItemBinding) :
     MovieHolder<MovieItemBinding>(binding) {
+    init {
+        println("--->  GridMovieHolder")
+    }
 
     override fun bind(movie: MovieEntity) {
         with(binding) {

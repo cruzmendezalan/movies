@@ -1,5 +1,6 @@
 package com.android.umba.domain
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -13,23 +14,37 @@ import javax.inject.Inject
 class MoviesListRepository @Inject constructor(
     private val apiServices: MovieDbServices,
     private val apiConfiguration: ApiConfigurationProvider,
-    private val stringResourceProvider: AndroidStringResourcesProvider
+    private val stringResourceProvider: AndroidStringResourcesProvider,
+    private val mediator: MoviesListMediator,
+    private val db: MoviesDatabase
 
 ) {
     /**
      * Allow to use the same code in a feature which return a paging list of movies.
      * Using [type] as a selector for the proper data source call.
      */
+    @OptIn(ExperimentalPagingApi::class)
     fun getMoviesListStream(type: String): Flow<PagingData<MovieEntity>> {
         return Pager(
-            config = PagingConfig(enablePlaceholders = true, pageSize = NETWORK_PAGE_SIZE),
-            pagingSourceFactory = {
-                MoviesListPagingSource(
-                    configuration = apiConfiguration,
-                    moviesStream = getMoviesStream(type)
-                )
+            config = PagingConfig(
+                enablePlaceholders = true,
+                pageSize = NETWORK_PAGE_SIZE,
+                initialLoadSize = NETWORK_PAGE_SIZE,
+                maxSize = 40
+            ),
+// TODO: remove comments if you want to use paging using only network.
+//            pagingSourceFactory = {
+//                MoviesListPagingSource(
+//                    configuration = apiConfiguration,
+//                    moviesStream = getMoviesStream(type)
+//                )
+//            }
+            remoteMediator = mediator.apply {
+                moviesStreamCallback = getMoviesStream(type)
             }
-        ).flow
+        ) {
+            db.getMoviesDao().moviesByListName(type)
+        }.flow
     }
 
     private fun getMoviesStream(type: String) = object : MoviesStream {
@@ -52,7 +67,7 @@ class MoviesListRepository @Inject constructor(
 
 
     companion object {
-        private const val NETWORK_PAGE_SIZE = 20
+        private const val NETWORK_PAGE_SIZE = 10
     }
 }
 

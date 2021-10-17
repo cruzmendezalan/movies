@@ -27,14 +27,17 @@ class MoviesListPagingSource @Inject constructor(
         return try {
             results = moviesStream.getMovies(page)
             val movies = results.results.map {
-                val result = it.toMovieEntity(configuration.getConfiguration(), moviesStream.getListType())
+                val result = it.toMovieEntity(
+                    configuration.getConfiguration(),
+                    moviesStream.getListType()
+                )
                 result
             }
 
             LoadResult.Page(
                 data = movies,
                 prevKey = if (page == POPULAR_MOVIES_STARTING_PAGE_INDEX) null else page - 1,
-                nextKey = if (page == results.totalPages) null else page + 1
+                nextKey = if (page == results.total_pages) null else page + 1
             )
         } catch (exception: Exception) {
             LoadResult.Error(exception)

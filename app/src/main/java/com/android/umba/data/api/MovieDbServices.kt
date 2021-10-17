@@ -58,7 +58,7 @@ data class Images(
 data class MoviesListResponse(
     val page: Int,
     val results: List<Movie>,
-    val totalPages: Int
+    val total_pages: Int
 )
 
 data class Movie(
