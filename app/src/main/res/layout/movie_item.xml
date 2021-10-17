@@ -7,6 +7,7 @@
     android:layout_margin="@dimen/dimen_8dp"
     android:clickable="true"
     android:focusable="true"
+    android:id="@+id/container"
     android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/dimen_16dp"
     app:cardElevation="@dimen/dimen_4dp"

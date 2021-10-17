@@ -25,7 +25,7 @@ class MovieDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = with(FragmentMovieDetailsBinding.inflate(inflater, container, false)) {
         binding = this
-        movieId = arguments?.getString(getString(R.string.movieIdKey)).orEmpty()
+        movieId = arguments?.getString(getString(R.string.toMovieDetailsIdKey)).orEmpty()
         binding.root
     }
 

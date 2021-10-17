@@ -14,6 +14,9 @@
             android:name="@string/moviesListArgumentKey"
             android:defaultValue="Popular Movies"
             app:argType="string" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_latest_movie"
+            app:destination="@id/navigation_movie_details" />
     </fragment>
 
     <fragment
@@ -25,11 +28,38 @@
             android:name="type"
             android:defaultValue="Upcoming Movies"
             app:argType="string" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_latest_movie"
+            app:destination="@id/navigation_movie_details" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_latest_movie"
         android:name="com.android.umba.presentation.moviedetails.MovieDetailsFragment"
         android:label="@string/title_latest_movie"
-        tools:layout="@layout/fragment_movie_details" />
+        tools:layout="@layout/fragment_movie_details">
+        <argument
+            android:name="@string/toMovieDetailsIdKey"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+
+    <action
+        android:id="@+id/to_movie_details"
+        app:destination="@+id/navigation_movie_details"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <fragment
+        android:id="@+id/navigation_movie_details"
+        android:name="com.android.umba.presentation.moviedetails.MovieDetailsFragment"
+        android:label="@string/title_details"
+        tools:layout="@layout/fragment_movie_details">
+        <argument
+            android:name="@string/toMovieDetailsIdKey"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
 </navigation>

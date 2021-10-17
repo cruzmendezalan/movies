@@ -9,5 +9,7 @@
     <string name="moviesListArgumentKey">type</string>
     <string name="production_countries_label">Production Countries</string>
     <string name="see_reviews_label">See reviews</string>
-    <string name="movieIdKey">movie_id</string>
+    <string name="toMovieDetailsIdKey">movie_id</string>
+    <string name="title_details">Details</string>
+    <string name="popularity">Popularity: %1$s</string>
 </resources>
