@@ -5,10 +5,10 @@ import com.android.umba.domain.MovieEntity
 
 object MoviesDiffCallback : DiffUtil.ItemCallback<MovieEntity>() {
     override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
-        return oldItem == newItem
+        return oldItem.popularity == newItem.popularity
     }
 }

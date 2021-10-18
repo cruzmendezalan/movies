@@ -2,9 +2,9 @@ package com.android.umba.di
 
 import android.content.Context
 import androidx.room.Room
-import com.android.umba.domain.ListNameRemoteKeyDao
+import com.android.umba.domain.MoviesListDao
 import com.android.umba.domain.MoviesDatabase
-import com.android.umba.domain.MoviesDao
+import com.android.umba.data.database.MoviesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,7 +29,7 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun getListNameRemoteKeyDao(database: MoviesDatabase): ListNameRemoteKeyDao {
+    fun getListNameRemoteKeyDao(database: MoviesDatabase): MoviesListDao {
         return database.getListNameRemoteKeyDao()
     }
 

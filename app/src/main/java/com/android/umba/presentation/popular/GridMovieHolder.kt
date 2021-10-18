@@ -9,9 +9,6 @@ import com.android.umba.domain.MovieEntity
 
 class GridMovieHolder(binding: MovieItemBinding) :
     MovieHolder<MovieItemBinding>(binding) {
-    init {
-        println("--->  GridMovieHolder")
-    }
 
     override fun bind(movie: MovieEntity) {
         with(binding) {
@@ -25,9 +22,12 @@ class GridMovieHolder(binding: MovieItemBinding) :
         }
 
         binding.container.setOnClickListener {
-            it.findNavController().navigate(R.id.to_movie_details, Bundle().apply {
-                putString(it.context.getString(R.string.toMovieDetailsIdKey), movie.id)
-            })
+            it.findNavController().navigate(
+                R.id.to_movie_details,
+                Bundle().apply {
+                    putString(it.context.getString(R.string.toMovieDetailsIdKey), movie.id)
+                }
+            )
         }
     }
 }

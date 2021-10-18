@@ -4,11 +4,8 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import androidx.room.withTransaction
-import com.android.umba.data.api.MovieDbServices
+import com.android.umba.data.database.MoviesDao
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -16,15 +13,11 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class MoviesListMediator @Inject constructor(
-    private val listNameRemoteKeyDao: ListNameRemoteKeyDao,
+    private val moviesListDao: MoviesListDao,
     private val moviesDao: MoviesDao,
     private val db: MoviesDatabase,
-    private val apiServices: MovieDbServices,
     private val apiConfiguration: ApiConfigurationProvider
 ) : RemoteMediator<Int, MovieEntity>() {
-
-    private val dao: MoviesDao = moviesDao
-    private val remoteKeyDao: ListNameRemoteKeyDao = listNameRemoteKeyDao
 
     var moviesStreamCallback: MoviesStream? = null
 
@@ -46,7 +39,9 @@ class MoviesListMediator @Inject constructor(
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
                     val remoteKey = db.withTransaction {
-                        remoteKeyDao.remoteKeyByPost(moviesStreamCallback?.getListType().orEmpty())
+                        moviesListDao.remoteKeyByPost(
+                            moviesStreamCallback?.getListType().orEmpty()
+                        )
                     }
 
                     if (remoteKey.nextPageKey == null) {
@@ -56,7 +51,7 @@ class MoviesListMediator @Inject constructor(
                     remoteKey.nextPageKey
                 }
             }
-            println("State $state")
+
             val data = moviesStreamCallback?.getMovies(page = loadKey ?: 1)
             val items = data?.results?.map {
                 it.toMovieEntity(
@@ -67,12 +62,14 @@ class MoviesListMediator @Inject constructor(
 
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    dao.deleteByListName(moviesStreamCallback?.getListType().orEmpty())
-                    remoteKeyDao.deleteByListName(moviesStreamCallback?.getListType().orEmpty())
+                    moviesDao.deleteByListName(moviesStreamCallback?.getListType().orEmpty())
+                    moviesListDao.deleteByListName(
+                        moviesStreamCallback?.getListType().orEmpty()
+                    )
                 }
 
-                remoteKeyDao.insert(
-                    ListNameRemoteKey(
+                moviesListDao.insert(
+                    MoviesListName(
                         moviesStreamCallback?.getListType().orEmpty(),
                         if (data?.total_pages ?: 0 <= data?.page ?: 0) {
                             null
@@ -81,7 +78,7 @@ class MoviesListMediator @Inject constructor(
                         }
                     )
                 )
-                dao.insertAll(items)
+                moviesDao.insertAll(items)
             }
 
             return MediatorResult.Success(endOfPaginationReached = items.isEmpty())
@@ -93,13 +90,3 @@ class MoviesListMediator @Inject constructor(
     }
 
 }
-
-
-@Entity(tableName = "remote_keys")
-data class ListNameRemoteKey(
-    @PrimaryKey
-    @ColumnInfo(collate = ColumnInfo.NOCASE)
-    val listName: String, // technically mutable but fine for a demo
-    val nextPageKey: Int?
-)
-

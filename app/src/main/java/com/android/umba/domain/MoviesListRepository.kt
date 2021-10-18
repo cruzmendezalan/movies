@@ -13,7 +13,6 @@ import javax.inject.Inject
 
 class MoviesListRepository @Inject constructor(
     private val apiServices: MovieDbServices,
-    private val apiConfiguration: ApiConfigurationProvider,
     private val stringResourceProvider: AndroidStringResourcesProvider,
     private val mediator: MoviesListMediator,
     private val db: MoviesDatabase
