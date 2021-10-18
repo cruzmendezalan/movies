@@ -12,4 +12,5 @@
     <string name="toMovieDetailsIdKey">movie_id</string>
     <string name="title_details">Details</string>
     <string name="popularity">Popularity: %1$s</string>
+    <string name="retry">Retry</string>
 </resources>

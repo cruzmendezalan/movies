@@ -43,6 +43,7 @@ android {
 dependencies {
 
     implementation libraries.kotlin.stdlib
+    implementation libraries.kotlin.coroutines
     implementation libraries.androidx.coreKtx
     implementation libraries.androidx.appcompat
     implementation libraries.material.material
@@ -61,6 +62,8 @@ dependencies {
     implementation libraries.dagger.hiltAndroid
     implementation libraries.androidx.paging
     implementation libraries.coil.coil
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
 
     kapt libraries.dagger.androidCompiler
     kapt libraries.androidx.roomCompiler
