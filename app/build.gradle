@@ -74,6 +74,7 @@ dependencies {
     testImplementation libraries.mockito.hamcrest
     testImplementation libraries.mockito.mockitoKotlin2
     testImplementation libraries.mockito.mockitoAndroid
+    testImplementation libraries.kotlin.coroutinesTest
 
     androidTestImplementation libraries.dagger.hiltTesting
     androidTestImplementation libraries.androidx.junit

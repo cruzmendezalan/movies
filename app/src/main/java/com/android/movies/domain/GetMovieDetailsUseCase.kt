@@ -4,7 +4,6 @@ import com.android.movies.data.api.MovieDbServices
 import com.android.movies.entities.MovieDetails
 import javax.inject.Inject
 
-
 class GetMovieDetailsUseCase @Inject constructor(
     private val services: MovieDbServices,
     private val configurationApi: ApiConfigurationProvider
