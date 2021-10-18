@@ -61,10 +61,20 @@ dependencies {
     implementation libraries.dagger.hiltAndroid
     implementation libraries.androidx.paging
     implementation libraries.coil.coil
+
     kapt libraries.dagger.androidCompiler
     kapt libraries.androidx.roomCompiler
     kaptAndroidTest libraries.dagger.androidCompiler
+
     testImplementation libraries.androidx.junit
+    testImplementation libraries.junit.junit
+
+    testImplementation libraries.mockito.mockitoCore
+    testImplementation libraries.mockito.mockitoInline
+    testImplementation libraries.mockito.hamcrest
+    testImplementation libraries.mockito.mockitoKotlin2
+    testImplementation libraries.mockito.mockitoAndroid
+
     androidTestImplementation libraries.dagger.hiltTesting
     androidTestImplementation libraries.androidx.junit
     androidTestImplementation libraries.androidx.espresso
