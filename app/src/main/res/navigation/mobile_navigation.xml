@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.android.umba.presentation.popular.MoviesListFragment"
+        android:name="com.android.movies.presentation.popular.MoviesListFragment"
         android:label="@string/title_popular_movies"
         tools:layout="@layout/fragment_movies_list">
         <argument
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.android.umba.presentation.popular.MoviesListFragment"
+        android:name="com.android.movies.presentation.popular.MoviesListFragment"
         android:label="@string/title_upcoming_movies"
         tools:layout="@layout/fragment_movies_list">
         <argument
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/navigation_latest_movie"
-        android:name="com.android.umba.presentation.moviedetails.MovieDetailsFragment"
+        android:name="com.android.movies.presentation.moviedetails.MovieDetailsFragment"
         android:label="@string/title_latest_movie"
         tools:layout="@layout/fragment_movie_details">
         <argument
@@ -54,7 +54,7 @@
 
     <fragment
         android:id="@+id/navigation_movie_details"
-        android:name="com.android.umba.presentation.moviedetails.MovieDetailsFragment"
+        android:name="com.android.movies.presentation.moviedetails.MovieDetailsFragment"
         android:label="@string/title_details"
         tools:layout="@layout/fragment_movie_details">
         <argument
