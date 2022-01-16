@@ -81,10 +81,11 @@ class MoviesListFragment : Fragment() {
             footer = PostsLoadStateAdapter(adapter)
         )
         lifecycleScope.launchWhenCreated {
-            adapter.loadStateFlow.collect { loadStates ->
-                binding.swipeRefresh.isRefreshing =
-                    loadStates.mediator?.refresh is LoadState.Loading
-            }
+//            adapter.loadStateFlow.
+//            collect { loadStates ->
+//                binding.swipeRefresh.isRefreshing =
+//                    loadStates.mediator?.refresh is LoadState.Loading
+//            }
         }
     }
 }
