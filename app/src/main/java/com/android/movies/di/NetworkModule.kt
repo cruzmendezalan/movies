@@ -1,6 +1,7 @@
 package com.android.movies.di
 
 import com.android.movies.data.api.MovieDbServices
+import com.android.movies.domain.NoConnectionInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,15 +14,16 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class ApiModule {
+class NetworkModule {
 
     @Singleton
     @Provides
-    fun getNetworkClient(): OkHttpClient {
+    fun getNetworkClient(noConnectionInterceptor: NoConnectionInterceptor): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder()
             .addInterceptor(logging)
+            .addInterceptor(noConnectionInterceptor)
             .build()
     }
 

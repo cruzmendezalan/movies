@@ -24,9 +24,9 @@ class MoviesListFragment : Fragment() {
     private lateinit var binding: FragmentMoviesListBinding
 
     /**
-     * Determines what kind of list we will showing in the UI
+     * Describes the category id which is used in the API.
      */
-    private lateinit var moviesListType: String
+    private lateinit var category: String
     private var moviesJob: Job? = null
 
     @Inject
@@ -45,7 +45,7 @@ class MoviesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = with(FragmentMoviesListBinding.inflate(inflater, container, false)) {
         binding = this
-        moviesListType = arguments?.getString(getString(R.string.moviesListArgumentKey)).orEmpty()
+        category = arguments?.getString(getString(R.string.moviesListArgumentKey)).orEmpty()
         this.root
     }
 
@@ -60,7 +60,7 @@ class MoviesListFragment : Fragment() {
         moviesJob?.cancel()
         moviesJob = lifecycleScope.launch {
             viewModel
-                .fetchMoviesList(moviesListType)
+                .fetchMoviesList(category)
                 .collectLatest {
                     binding.container.visibility = View.VISIBLE
                     adapter.submitData(it)
